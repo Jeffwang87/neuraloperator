@@ -127,11 +127,12 @@ class Trainer:
                 if output_encoder is not None and self.mg_patching_stitching:
                     out = output_encoder.decode(out)
                     y = output_encoder.decode(y)
+                    print('jiba')
                 if epoch == 0 and idx == 0 and self.verbose and is_logger:
                     print(f'.. Processed (unpatched) outputs of size {out.shape=}')
-
+                print(out.float())
                 loss = training_loss(out.float(), y)
-
+                
                 if regularizer:
                     loss += regularizer.loss
 
@@ -139,7 +140,7 @@ class Trainer:
                 
                 optimizer.step()
                 train_err += loss.item()
-                print(train_err)
+                
                 
                 with torch.no_grad():
                     avg_loss += loss.item()
