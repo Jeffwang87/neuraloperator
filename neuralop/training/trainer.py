@@ -139,7 +139,8 @@ class Trainer:
                 
                 optimizer.step()
                 train_err += loss.item()
-        
+                print(train_err)
+                
                 with torch.no_grad():
                     avg_loss += loss.item()
                     if regularizer:
