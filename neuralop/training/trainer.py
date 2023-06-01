@@ -137,7 +137,7 @@ class Trainer:
                     loss += regularizer.loss
 
                 loss.backward()
-                
+                torch.nn.utils.clip_grad_value_(model.parameters(), 1)
                 optimizer.step()
                 train_err += loss.item()
                 
