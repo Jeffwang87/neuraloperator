@@ -130,7 +130,7 @@ class Trainer:
                     print('jiba')
                 if epoch == 0 and idx == 0 and self.verbose and is_logger:
                     print(f'.. Processed (unpatched) outputs of size {out.shape=}')
-                print(out.float())
+                #print(out.float())
                 loss = training_loss(out.float(), y)
                 
                 if regularizer:
@@ -138,6 +138,8 @@ class Trainer:
 
                 loss.backward()
                 torch.nn.utils.clip_grad_value_(model.parameters(), 0.00001)
+                grads_temp = {n:p.grad.cpu() for n, p in model.named_parameters()}
+                print(grads_temp)
                 optimizer.step()
                 train_err += loss.item()
                 
