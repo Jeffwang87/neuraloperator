@@ -8,6 +8,7 @@ import neuralop.mpu.comm as comm
 from .patching import MultigridPatching2D
 from .losses import LpLoss
 
+torch.autograd.set_detect_anomaly(True)
 
 class Trainer:
     def __init__(self, model, n_epochs, wandb_log=True, device=None,
